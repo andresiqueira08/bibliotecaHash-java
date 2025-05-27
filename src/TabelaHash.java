@@ -16,10 +16,12 @@ public class TabelaHash {
 
     public Livro buscarLivro(String isbn) {
         return tabelaLivros.get(isbn);
-    }
+}
+
     public Usuario buscarUsuario(int id) {
         return tabelaUsuarios.get(id);
-    }
+}
+
 public void atualizarUsuario(int id, String novoNome, String novoEmail, String novoTelefone) {
     Usuario usuario = tabelaUsuarios.get(id); // Busca usuário pelo ID
     if (usuario != null) {

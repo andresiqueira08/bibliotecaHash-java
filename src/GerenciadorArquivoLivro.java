@@ -10,22 +10,30 @@ public class GerenciadorArquivoLivro {
     }
 
 public static HashMap<String, Livro> carregarLivros() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("C:\\Users\\LORENA\\andre_JAVA\\bibliotecaHASH\\dados\\livros.dat"))) {
-        Object obj = in.readObject(); // Lê o objeto do arquivo
+    try (ObjectInputStream in = new ObjectInputStream(
+            new FileInputStream("C:\\Users\\LORENA\\andre_JAVA\\bibliotecaHASH\\dados\\livros.dat"))) {
 
-        // Usa Pattern Matching com instanceof
-        if (obj instanceof HashMap<?, ?> tempMap) {
+        Object obj = in.readObject();
+
+        if (obj instanceof HashMap<?, ?>) {
+            HashMap<?, ?> tempMap = (HashMap<?, ?>) obj;
             HashMap<String, Livro> livros = new HashMap<>();
+
             for (var entry : tempMap.entrySet()) {
-                if (entry.getKey() instanceof String key && entry.getValue() instanceof Livro livro) {
-                    livros.put(key, livro);
+                Object key = entry.getKey();
+                Object value = entry.getValue();
+
+                if (key instanceof String && value instanceof Livro) {
+                    livros.put((String) key, (Livro) value);
                 }
             }
             return livros;
         }
+
     } catch (IOException | ClassNotFoundException e) {
         System.out.println("Erro ao carregar livros: " + e.getMessage());
     }
-    return new HashMap<>(); // Retorna um HashMap vazio em caso de erro
+    return new HashMap<>();
 }
+
 }

@@ -1,16 +1,15 @@
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        // Inicializa o sistema
         TabelaHash tabelaHash = new TabelaHash();
-        // Carrega os usuários do arquivo
-    tabelaHash.setLivros(GerenciadorArquivoLivro.carregarLivros());
-    tabelaHash.setUsuarios(GerenciadorArquivoUsuario.carregarUsuarios());
+        tabelaHash.setLivros(GerenciadorArquivoLivro.carregarLivros());
+        tabelaHash.setUsuarios(GerenciadorArquivoUsuario.carregarUsuarios());
 
-    System.out.println("Livros carregados: " + tabelaHash.getLivros());
-    System.out.println("Usuários carregados: " + tabelaHash.getUsuarios());
+        Emprestimo emprestimo = new Emprestimo(tabelaHash.getUsuarios(), tabelaHash.getLivros());
 
-        // Chama o menu interativo
-        Biblioteca.main(args);
+        try (Scanner scanner = new Scanner(System.in)) {
+            Biblioteca.iniciarSistema(tabelaHash, scanner, emprestimo); 
+        }
         
         // Antes de fechar, salva os usuários atualizados
         GerenciadorArquivoUsuario.salvarUsuarios(tabelaHash.getUsuarios());

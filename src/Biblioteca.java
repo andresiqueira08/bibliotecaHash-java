@@ -1,11 +1,7 @@
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Biblioteca{
-    public static void main(String[] args) {
-        TabelaHash tabelaHash = new TabelaHash();
-        Emprestimo emprestimo = new Emprestimo(tabelaHash.getUsuarios(), tabelaHash.getLivros()); 
-        try (Scanner scanner = new Scanner(System.in)) { //O java recomenda usar para garantir que o scanner sejp fechado ao final do blococ
+    public static void iniciarSistema(TabelaHash tabelaHash, Scanner scanner, Emprestimo emprestimo) { 
         int opcao;
         do {
             System.out.println("\n===== Biblioteca Interativa =====");
@@ -60,7 +56,7 @@ public class Biblioteca{
         } while (opcao != 0);
 
     }
-    }
+    
 
     // Função para cadastrar um novo livro
 private static void cadastrarLivro(Scanner scanner, TabelaHash tabelaHash) {
