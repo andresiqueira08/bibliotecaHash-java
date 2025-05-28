@@ -14,6 +14,8 @@ public class Biblioteca{
             System.out.println("7 - Empréstimo de Livro");
             System.out.println("8 - Devolução de Livro");
             System.out.println("9 - Listar Empréstimos");
+            System.out.println("10 - Remover Livro");
+            System.out.println("11 - Remover usuário");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -46,6 +48,12 @@ public class Biblioteca{
                     break;
                 case 9:
                     emprestimo.listarEmprestimos();
+                    break;
+                case 10:
+                    removerLivro(scanner, tabelaHash);
+                    break;
+                case 11:
+                    removerUsuario(scanner, tabelaHash);
                     break;
                 case 0:
                     System.out.println("Saindo... Até mais!");
@@ -81,24 +89,24 @@ private static void cadastrarLivro(Scanner scanner, TabelaHash tabelaHash) {
 }
 
 // Função para cadastrar um novo usuário
-private static void cadastrarUsuario(Scanner scanner, TabelaHash tabelaHash) {
-    System.out.print("Digite o ID do usuário: ");
-    int id = scanner.nextInt();
-    scanner.nextLine();
-    System.out.print("Digite o nome: ");
-    String nome = scanner.nextLine();
-    System.out.print("Digite o e-mail: ");
-    String email = scanner.nextLine();
-    System.out.print("Digite o telefone: ");
-    String telefone = scanner.nextLine();
+    private static void cadastrarUsuario(Scanner scanner, TabelaHash tabelaHash) {
+        System.out.print("Digite o ID do usuário: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Digite o nome: ");
+        String nome = scanner.nextLine();
+        System.out.print("Digite o e-mail: ");
+        String email = scanner.nextLine();
+        System.out.print("Digite o telefone: ");
+        String telefone = scanner.nextLine();
 
-    Usuario novoUsuario = new Usuario(id, nome, email, telefone);
-    tabelaHash.adicionarUsuario(novoUsuario); // Adiciona o livro à memória
+        Usuario novoUsuario = new Usuario(id, nome, email, telefone);
+        tabelaHash.adicionarUsuario(novoUsuario); // Adiciona o livro à memória
 
-    GerenciadorArquivoUsuario.salvarUsuarios(tabelaHash.getUsuarios());
-    System.out.println("Usuario cadastrado e salvo com sucesso!");
+        GerenciadorArquivoUsuario.salvarUsuarios(tabelaHash.getUsuarios());
+        System.out.println("Usuario cadastrado e salvo com sucesso!");
 
-}
+    }
 
     // Função para buscar um livro pelo ISBN
     private static void buscarLivro(Scanner scanner, TabelaHash tabelaHash) {
@@ -172,4 +180,16 @@ private static void cadastrarUsuario(Scanner scanner, TabelaHash tabelaHash) {
         String isbn = scanner.nextLine();
         emprestimo.devolverLivro(isbn);
     }
+    private static void removerLivro(Scanner scanner, TabelaHash tabelaHash) {
+    System.out.print("Digite o ISBN do livro a ser removido: ");
+    String isbn = scanner.nextLine();
+    tabelaHash.removerLivro(isbn);
+}
+
+    private static void removerUsuario(Scanner scanner, TabelaHash tabelaHash) {
+        System.out.print("Digite o ID do usuário a ser removido: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        tabelaHash.removerUsuario(id);
+}
 }

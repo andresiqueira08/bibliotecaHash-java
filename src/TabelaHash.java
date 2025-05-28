@@ -22,42 +22,59 @@ public class TabelaHash {
         return tabelaUsuarios.get(id);
 }
 
-public void atualizarUsuario(int id, String novoNome, String novoEmail, String novoTelefone) {
-    Usuario usuario = tabelaUsuarios.get(id); // Busca usuário pelo ID
-    if (usuario != null) {
-        usuario.setNome(novoNome);
-        usuario.setEmail(novoEmail);
-        usuario.setTelefone(novoTelefone);
-    } else {
-        System.out.println("Usuário não encontrado.");
+    public void atualizarUsuario(int id, String novoNome, String novoEmail, String novoTelefone) {
+        Usuario usuario = tabelaUsuarios.get(id); // Busca usuário pelo ID
+        if (usuario != null) {
+            usuario.setNome(novoNome);
+            usuario.setEmail(novoEmail);
+            usuario.setTelefone(novoTelefone);
+        } else {
+            System.out.println("Usuário não encontrado.");
+        }
     }
-}
-public void atualizarLivro(String isbn, String novoTitulo, String novoAutor, int novoAno, int novoCopias){
-    Livro livro = tabelaLivros.get(isbn);
-    if (livro != null){
-        livro.setTitulo(novoTitulo);
-        livro.setAno(novoAno);
-        livro.setAutor(novoAutor);
-        livro.setCopias(novoCopias);
+
+    public void atualizarLivro(String isbn, String novoTitulo, String novoAutor, int novoAno, int novoCopias){
+        Livro livro = tabelaLivros.get(isbn);
+        if (livro != null){
+            livro.setTitulo(novoTitulo);
+            livro.setAno(novoAno);
+            livro.setAutor(novoAutor);
+            livro.setCopias(novoCopias);
+        }
+        else{
+            System.out.println("Livro não encontrado.");
+        }
     }
-    else{
-        System.out.println("Livro não encontrado.");
-    }
-}
 //As funções abaixo servem para permitir o acesso aos dados armazenados dentro da classe TabelaHash, sem expor diretamente suas variáveis internas.
 
-public HashMap<Integer, Usuario> getUsuarios() {
-    return tabelaUsuarios;
-}
+    public HashMap<Integer, Usuario> getUsuarios() {
+        return tabelaUsuarios;
+    }
 
-public HashMap<String, Livro> getLivros() {
-    return tabelaLivros;
-}
-public void setLivros(HashMap<String, Livro> livros) {
-    this.tabelaLivros = livros;
-}
-public void setUsuarios(HashMap<Integer, Usuario> usuarios) {
-    this.tabelaUsuarios = usuarios;
-}
+    public HashMap<String, Livro> getLivros() {
+        return tabelaLivros;
+    }
+    public void setLivros(HashMap<String, Livro> livros) {
+        this.tabelaLivros = livros;
+    }
+    public void setUsuarios(HashMap<Integer, Usuario> usuarios) {
+        this.tabelaUsuarios = usuarios;
+    }
+    public void removerLivro(String isbn) {
+        if (tabelaLivros.containsKey(isbn)) {
+            tabelaLivros.remove(isbn);
+            System.out.println("Livro removido com sucesso.");
+        } else {
+            System.out.println("Livro não encontrado.");
+        }
+    }
 
+    public void removerUsuario(int id) {
+        if (tabelaUsuarios.containsKey(id)) {
+            tabelaUsuarios.remove(id);
+            System.out.println("Usuário removido com sucesso.");
+        } else {
+            System.out.println("Usuário não encontrado.");
+        }
+    }
 }
